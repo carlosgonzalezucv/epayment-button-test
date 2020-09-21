@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment button test</title>
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
+    <script src="http://24-7net.xyz/SDK/OnlinePayment"></script>
+  </head>
+  <body>
+    <div>
+      <h1>Prueba con el boton de pago</h1>
+
+      <div id="container-payment-button"></div>
+      <script>
+        net247.button.create({
+          style: {
+            color: "white",
+            label: "Pay with",
+          },
+          createOrder: function (actions) {
+            return actions.order.create({
+              amount: "1.00",
+              id: "NWYwMDBiNWYyM2RiODVmMTAwMTg4MDM3",
+            });
+          },
+          onApprove: function (actions, id) {
+            actions.order.capture(function (details) {
+              alert("Transaction " + details.text + "!");
+            }, id);
+          },
+        });
+      </script>
+    </div>
+  </body>
+</html>
